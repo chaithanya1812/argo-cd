@@ -15,7 +15,7 @@ spec:
     spec:
        containers:
          - name: chatcontainer
-           image: chaitu1812/chat
+           image: chaitu1812/movieapp
            ports:
             - containerPort: 8080  
               # nodeSelector:
