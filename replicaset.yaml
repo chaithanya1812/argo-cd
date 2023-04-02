@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: newreplicaset  
+  namespace: test-ns
+spec:
+  replicas: 3
+  selector:
+   matchLabels:
+     app: ram
+  template:
+    metadata:
+      labels:
+        app: ram
+    spec:
+       containers:
+         - name: chatcontainer
+           image: chaitu1812/chat
+           ports:
+            - containerPort: 8080  
+              # nodeSelector:
+              #rrr: "ntr"    
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: replicasetservice
+  namespace: test-ns
+spec:
+  type: NodePort
+  selector:
+    app: ram
+  ports:
+   - port: 8090
+     targetPort: 8080
+     nodePort: 32245
